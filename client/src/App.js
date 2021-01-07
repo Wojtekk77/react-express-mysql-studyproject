@@ -19,18 +19,13 @@ function App() {
     setReviewList([...reviewsList, { movieName: movieName, movieReview: review }])
   }
 
-  const api = 'https://ticketmaster-django.herokuapp.com/';
+  const api = 'https://ticketmaster-django.herokuapp.com/admin/events';
   const token = 'Token 654f6ac41de1b0f152e5cc36a3b6ce2c0b5350cb';
   const getDataFromApi = () => {
     Axios.get(api, { headers: { "Authorization": `${token}` } })
       .then(res => {
-        console.log(res.data);
+        console.log('res', res);
         setIsLoaded(!isLoaded);
-        this.setState({
-          items: res.data,  /*set response data in items array*/
-          isLoaded: true,
-          redirectToReferrer: false
-        })
       })
   }
 
@@ -59,6 +54,7 @@ function App() {
         <button onClick={submitReview}>submit</button>
       </div>
       <button onClick={getDataFromApi}>Get data From API</button>
+      {isLoaded ? <p>true</p> : <p>false</p>}
     </div>
   );
 }
